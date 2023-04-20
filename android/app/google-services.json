@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "401011219584",
+    "project_id": "guc-guide",
+    "storage_bucket": "guc-guide.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401011219584:android:30f947e298f824f2465a65",
+        "android_client_info": {
+          "package_name": "com.example.myfirstapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401011219584-dg5mhn67jcemp95io8pmgh15b4i3suei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAErMUsDLAZUpCLfiF24R9QBhQt6a-GnzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401011219584-dg5mhn67jcemp95io8pmgh15b4i3suei.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
