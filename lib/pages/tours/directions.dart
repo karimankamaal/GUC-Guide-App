@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:myfirstapp/utils/dimensions.dart';
 
-import '../widgets/IconAndTextWidget.dart';
+import '../../widgets/IconAndTextWidget.dart';
 class Directions extends StatefulWidget {
   const Directions({Key? key}) : super(key: key);
 
@@ -19,6 +19,7 @@ class _DirectionsState extends State<Directions> {
   double _height =Dimensions.pageViewContainer;
  String image1= "lib/assets/img.png";
   String image2= "lib/assets/solarpanel.jpeg";
+  String image3="lib/assets/destination_pin.png";
   @override
   void initState() {
     super.initState();
@@ -50,22 +51,22 @@ class _DirectionsState extends State<Directions> {
               icon: Icon(
                   Icons.arrow_back_ios, color: Colors.lightBlue[800]),
               onPressed: () {
-                Navigator.pushNamed(context, '/homepage');
+                Navigator.pushNamed(context, '/solarpark');
               },
             ),
           ),
         ),
         Container(
-          margin: EdgeInsets.only(top: 45, left: 310),
+          margin: EdgeInsets.only(top: 45, left: 300),
           child: Column(
             children: [
-              Text("MRS", style: TextStyle(fontSize: 25,
+              Text("Solar", style: TextStyle(fontSize: 23,
                   fontFamily: 'misto',
                   color: Colors.lightBlue[800]),),
-              Text("Lab", style: TextStyle(fontSize: 25,
+              Text("Park", style: TextStyle(fontSize: 23,
                   fontFamily: 'misto',
                   color: Colors.lightBlue[800]),),
-              Text("Tour", style: TextStyle(fontSize: 25,
+              Text("Tour", style: TextStyle(fontSize: 23,
                   fontFamily: 'misto',
                   color: Colors.lightBlue[800]),),
 
@@ -122,18 +123,30 @@ class _DirectionsState extends State<Directions> {
                   icon: Icons.location_pin,
                   text: 'Gate 1',
                   onPressed:(){
-                    setState(() {
-                     image1=image2;
-                    });
+
                   },
                 ),
                 GButton(
                   icon: Icons.location_pin,
                   text: 'Gate 2',
+                  onPressed: (){
+                    setState(() {
+                      image1=image3;
+                      image2=image1;
+                      image3=image2;
+                    });
+                  },
                 ),
                 GButton(
                   icon: Icons.location_pin,
                   text: 'Gate 3',textSize: 30,
+                    onPressed: (){
+                      setState(() {
+                        image1=image2;
+                        image2=image3;
+                        image3=image2;
+                      });
+                    }
                 ),
 
               ]
@@ -174,7 +187,7 @@ class _DirectionsState extends State<Directions> {
                     borderRadius: BorderRadius.circular(Dimensions.radius30),
                     color:Color(0xFF69c5df)
                 ),
-                child: index==0? Image.asset(image1): index==1?Image.asset(image2):index==2? Image.asset(image1):Image.asset(image1),
+                child: index==0? Image.asset(image1,fit: BoxFit.fitHeight,): index==1?Image.asset(image2,fit: BoxFit.fitHeight):index==2? Image.asset(image3,fit: BoxFit.fill):Image.asset(image3,fit: BoxFit.fill),
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -206,7 +219,7 @@ class _DirectionsState extends State<Directions> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(index == 0 ? "Solar Park Tour" : "MRS Lab Tour", style: TextStyle(
+                        Text(index == 0 ? "Enter from gate 1" : index==1? "Go left":"Take the second right ", style: TextStyle(
                           fontFamily: 'roboto',
                           fontSize: 26,
                         )),

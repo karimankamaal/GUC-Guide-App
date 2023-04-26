@@ -24,10 +24,9 @@ class _SearchState extends State<Search> {
       return;
     }
     final result = await FirebaseFirestore.instance.collection('events')
-        .where('title', isGreaterThanOrEqualTo: query)
-        .where('title', isLessThan: query + 'z')
+        .where('title_lowercase', isGreaterThanOrEqualTo: query.toLowerCase())
+        .where('title_lowercase', isLessThan: query.toLowerCase() + 'z')
         .get();
-
     setState(() {
       events = result.docs.map((e) => e.data()).toList();
     });

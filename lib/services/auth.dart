@@ -52,7 +52,7 @@ MyUser? _userFromFirebase(User user){
         'location': location,
         'imageURL': imageURL,
       });
-
+      await updateTitleLowercaseField();
       print('Event added successfully to Firestore!');
     } catch (e) {
       print('Error adding event to Firestore: $e');
@@ -75,5 +75,26 @@ MyUser? _userFromFirebase(User user){
       print('Error adding robot to Firestore: $e');
     }
   }
+
+  // Update existing documents to include the 'title_lowercase' field
+  Future<void> updateTitleLowercaseField() async {
+    final result = await FirebaseFirestore.instance.collection('events').get();
+    final batch = FirebaseFirestore.instance.batch();
+    result.docs.forEach((doc) {
+      final data = doc.data();
+      final title = data['title'];
+      batch.update(doc.reference, {
+        'title_lowercase': title.toLowerCase(),
+      });
+    });
+    await batch.commit();
+  }
+
+   Future<List<QueryDocumentSnapshot>> getCollection(String collectionPath) async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection(collectionPath).get();
+    List<QueryDocumentSnapshot> documents = snapshot.docs;
+    return documents;
+  }
+
 
 }

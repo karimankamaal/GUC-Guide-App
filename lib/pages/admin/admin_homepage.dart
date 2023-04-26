@@ -232,12 +232,17 @@ class _AdminHomepageState extends State<AdminHomepage> {
                 Positioned(
                     top: 450,
                     left:35,
-                    child: Container(
-                      width: 156,
-                      height: 212,
-                      decoration:BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color:Colors.lightBlue[800]
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.pushNamed(context, '/editrobot');
+                      },
+                      child: Container(
+                        width: 156,
+                        height: 212,
+                        decoration:BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color:Colors.lightBlue[800]
+                        ),
                       ),
                     )),
                 Positioned(
@@ -260,7 +265,7 @@ class _AdminHomepageState extends State<AdminHomepage> {
                     child:Container(
                       width:70,
                       child: Text(
-                        "Add User",style: TextStyle(
+                        "Edit Robot",style: TextStyle(
                           fontFamily: 'robotoN',
                           fontSize: 20,
                           fontWeight: FontWeight.bold

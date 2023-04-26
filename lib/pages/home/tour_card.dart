@@ -174,7 +174,7 @@ class _TourCardsState extends State<TourCards> {
                   Navigator.pushNamed(context, '/solarpark');
                 }
                 if(index==1){
-                  Navigator.pushNamed(context, '/mrsdetail');
+                  Navigator.pushNamed(context, '/mrstour');
                 }
               },
               child: Container(

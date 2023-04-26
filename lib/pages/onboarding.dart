@@ -80,7 +80,7 @@ class _OnBoardingState extends State<OnBoarding> {
                               height: 11,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Color(0xffff0000),
+                                color: Colors.lightBlue[800],
                               ),
                             ),
 
@@ -99,7 +99,7 @@ class _OnBoardingState extends State<OnBoarding> {
                         ),
                       ),
                       Positioned(
-                        top: 18,
+                        top: 15,
                         left: 27,
                         child: Padding(
                           padding: const EdgeInsets.only(right:3.0,bottom: 3.0),
@@ -144,13 +144,13 @@ class _OnBoardingState extends State<OnBoarding> {
                         top: 7,
                         left: 30,
                         child: Padding(
-                          padding: const EdgeInsets.only(top:8.0,right: 3.0),
+                          padding: const EdgeInsets.only(top:8.0,right: 9.0),
                           child: InkWell(
                             onTap: (){
                               widget.toggleView();
                             },
                             child: Row(
-
+                             mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
                                   "Login as Admin",

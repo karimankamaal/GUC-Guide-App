@@ -111,201 +111,208 @@ class _EventsFormState extends State<EventsForm> {
     return Scaffold(
 
         body:
-            Stack(
-            children:[
-              Positioned(
-                top: 30,
-                  left: 20,
-                  child:Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-
-                        Container(
-                          width: 45,
-                          height: 45,
-                          margin: EdgeInsets.only(right: 140),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                            child: IconButton(
-                              icon: Icon(
-                                  Icons.arrow_back_ios, color: Colors.lightBlue[800]),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                        ),
-
-                  Container(
-                    child:
-                  Text(
-                "Events Form",style: TextStyle(
-                fontWeight: FontWeight.bold,fontSize: 28,fontFamily: 'roboto',color: Colors.lightBlue
-              ),
-              )
-                  ),
-                    ])
-              ),
-
-        SingleChildScrollView(
-            child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Form(
-                    key: _formKey,
-                    child: Container(
-                      margin: EdgeInsets.only(top: 65),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            TextFormField(
-                              controller: _nameController,
-                              decoration: InputDecoration(labelText: 'Name'),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter a name for the event';
-                                }
-                                return null;
-                              },
-                            ),
-                            SizedBox(height: 16.0),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'Date:${DateFormat('dd/MM/yyyy').format(
-                                        _date)}',
-                                    style: TextStyle(fontSize: 16.0),
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () => _selectDate(context),
-                                  child: Text('Select date'),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 16.0),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'Starts at: ${_startTime.format(context)}',
-                                    style: TextStyle(fontSize: 16.0),
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () => _selectTime(context),
-                                  child: Text('Select time'),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 16.0),
-                            TextFormField(
-                              controller: _descriptionController,
-                              decoration: InputDecoration(
-                                  labelText: 'Description'),
-                              keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter a description for the event';
-                                }
-                                return null;
-                              },
-                            ),
-                            SizedBox(height: 16.0),
-                            TextFormField(
-                                controller: _locationController,
-                                decoration: InputDecoration(
-                                    labelText: 'Location'),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter a location for the event';
-                                  }
-                                }
-                            ),
-                            SizedBox(height: 16.0),
-                            Container(
-                              margin: const EdgeInsets.only(top: 8),
-                              child: _image != null
-                                  ? Stack(
-                                  children:[
-                                    Image.file(
-                                        _image!,
-                                        width: 335,
-                                        height: 300,
-                                        fit: BoxFit.fill
-                                    ),
-                                    Positioned(
-                                      top: 410,
-                                      left:76,
-                                      width:190,
-                                      height: 55,
-                                      child: ElevatedButton(onPressed: (){
-                                        _imgFromCamera();
-                                      }, child: Text("Capture another robot!")),
-                                    ),
-
-                                  ]
-                              )
-                                  : InkWell(
-                                onTap: (){
-                                  _imgFromCamera();
-                                },
-                                    child: Container(
-                                width: 200,
-                                height: 200,
-                                child: const Icon(
-                                    Icons.camera_alt,
-                                    color: Colors.black,
-                                    size: 100,
+            SafeArea(
+              child: Stack(
+              children:[
+                Positioned(
+                  top: 20,
+                    left: 20,
+                            child: Container(
+                              width: 45,
+                              height: 45,
+                              margin: EdgeInsets.only(right: 140),
+                              decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: IconButton(
+                                  icon: Icon(
+                                      Icons.arrow_back_ios, color: Colors.lightBlue[800]),
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/homepage');
+                                  },
                                 ),
                               ),
-                                  ),
-                            ),
-                            ElevatedButton(
-                              onPressed : ()async {
-                                if (_formKey.currentState!.validate() &&
-                                    _nameController.text.isNotEmpty &&
-                                    _descriptionController.text.isNotEmpty &&
-                                    _locationController.text.isNotEmpty) {
-                                  // Save form data to variables
-                                  String name = _nameController.text;
-                                  DateTime date = _date;
-                                  TimeOfDay time = _startTime;
-                                  String description = _descriptionController.text;
-                                  String location = _locationController.text;
 
-                                  final Timestamp finalTime= combineDateAndTime(date, time);
-                                  // Do something with the data, e.g. print them to console
-                                  _auth.saveToFirebase(finalTime, name, description, location,_image!);
-                                  //sendNotification();
-                                  // Clear text fields
-                                  _nameController.clear();
-                                  _descriptionController.clear();
-                                  _locationController.clear();
-
-                                  // Show success message
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                    content: Text('Event created successfully!'),
-                                  ));
-                                }
-                              },
-                              child: Text('Submit'),
-                            )
-
-
-                          ]
-                      ),
-                    )
+                          ),
+                ),
+                    Positioned(
+                      top:20,
+                      left:200,
+                      child: Container(
+                        child:
+                      Text(
+                  "Events Form",style: TextStyle(
+                  fontWeight: FontWeight.bold,fontSize: 28,fontFamily: 'roboto',color: Colors.lightBlue
+                ),
                 )
-            )
+                      ),
+                    ),
+
+
+
+        SingleChildScrollView(
+              child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Form(
+                      key: _formKey,
+                      child: Container(
+                        margin: EdgeInsets.only(top: 65),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextFormField(
+                                controller: _nameController,
+                                decoration: InputDecoration(labelText: 'Name'),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter a name for the event';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(height: 16.0),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Date:${DateFormat('dd/MM/yyyy').format(
+                                          _date)}',
+                                      style: TextStyle(fontSize: 16.0),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => _selectDate(context),
+                                    child: Text('Select date'),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 16.0),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Starts at: ${_startTime.format(context)}',
+                                      style: TextStyle(fontSize: 16.0),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => _selectTime(context),
+                                    child: Text('Select time'),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 16.0),
+                              TextFormField(
+                                controller: _descriptionController,
+                                decoration: InputDecoration(
+                                    labelText: 'Description'),
+                                keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter a description for the event';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(height: 16.0),
+                              TextFormField(
+                                  controller: _locationController,
+                                  decoration: InputDecoration(
+                                      labelText: 'Location'),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter a location for the event';
+                                    }
+                                  }
+                              ),
+                              SizedBox(height: 16.0),
+                              Container(
+                                margin: const EdgeInsets.only(top: 8),
+                                child: _image != null
+                                    ? Stack(
+                                    children:[
+                                      Image.file(
+                                          _image!,
+                                          width: 335,
+                                          height: 300,
+                                          fit: BoxFit.fill
+                                      ),
+                                      Positioned(
+                                        top: 410,
+                                        left:76,
+                                        width:190,
+                                        height: 55,
+                                        child: ElevatedButton(onPressed: (){
+                                          _imgFromCamera();
+                                        }, child: Text("Capture another robot!")),
+                                      ),
+
+                                    ]
+                                )
+                                    : InkWell(
+                                  onTap: (){
+                                    _imgFromCamera();
+                                  },
+                                      child: Container(
+                                  width: 200,
+                                  height: 200,
+                                  child: const Icon(
+                                      Icons.camera_alt,
+                                      color: Colors.black,
+                                      size: 100,
+                                  ),
+                                ),
+                                    ),
+                              ),
+                              ElevatedButton(
+                                onPressed : ()async {
+                                  if (_formKey.currentState!.validate() &&
+                                      _nameController.text.isNotEmpty &&
+                                      _descriptionController.text.isNotEmpty &&
+                                      _locationController.text.isNotEmpty) {
+                                    // Save form data to variables
+                                    String name = _nameController.text;
+                                    DateTime date = _date;
+                                    TimeOfDay time = _startTime;
+                                    String description = _descriptionController.text;
+                                    String location = _locationController.text;
+
+                                    final Timestamp finalTime= combineDateAndTime(date, time);
+                                    // Do something with the data, e.g. print them to console
+                                    _auth.saveToFirebase(finalTime, name, description, location,_image!);
+                                    //sendNotification();
+                                    // Clear text fields
+                                    _nameController.clear();
+                                    _descriptionController.clear();
+                                    _locationController.clear();
+                                    setState(() {
+                                      _image=null;
+                                    });
+
+
+                                    // Show success message
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                      content: Text('Event created successfully!'),
+                                    ));
+                                  }
+                                },
+                                child: Text('Submit'),
+                              )
+
+
+                            ]
+                        ),
+                      )
+                  )
+              )
         )
 
     ]
-    )
+    ),
+            )
     );
   }
 }

@@ -41,7 +41,6 @@ class _EventEditState extends State<EventEdit> {
     final TextEditingController descriptionController= TextEditingController();
     late DateTime _date = DateTime(2023);
     Future<void> updateTitle(String eventitle) async {
-
       await showModalBottomSheet(
         isScrollControlled: true,
           context: context,

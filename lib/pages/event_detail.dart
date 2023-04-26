@@ -96,7 +96,7 @@ class EventDetail extends StatelessWidget {
                height: 600,
                  child:
              SingleChildScrollView(child:
-             ExpandableText( text:"Yes, TensorFlow has an official package for Dart called tf_dart that allows developers to use TensorFlow in their Dart applications. This package provides APIs for loading and running TensorFlow models, as well as training models using TensorFlow's built-in optimizers. Additionally, there are several other third-party packages for Dart that provide integration with TensorFlow, such as tflite_flutter for running TensorFlow Lite models on mobile devices.TensorFlow is an open-source library developed by Google for machine learning and deep learning applications. It provides a platform for building and training machine learning models, including neural networks, and has become a popular tool in the field of artificial intelligence. TensorFlow allows developers to create and train models on a variety of platforms, including desktop computers, servers, and mobile devices. It supports multiple programming languages, including Python, C++, Java, and Swift, and can be used for a wide range of applications, such as image recognition, natural language processing, and speech recognition."))),
+             ExpandableText( text: event?.description?? ''))),
 
 
 

@@ -104,7 +104,6 @@ class _MRSDetailState extends State<MRSDetail> {
   Widget build(BuildContext context) {
 
     void redirect(){
-     print("badkhol");
       Navigator.pushNamed(context, '/robotdetail', arguments: text,);
     }
     print("jiiiii"+description);
@@ -124,7 +123,7 @@ class _MRSDetailState extends State<MRSDetail> {
                   icon: Icon(
                       Icons.arrow_back_ios, color: Colors.lightBlue[800]),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/homepage');
+                    Navigator.pushNamed(context, '/mrstour');
                   },
                 ),
               ),

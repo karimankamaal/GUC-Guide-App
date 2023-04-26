@@ -11,8 +11,10 @@ import 'package:myfirstapp/pages/admin/add_robot.dart';
 import 'package:myfirstapp/pages/admin/admin_homepage.dart';
 import 'package:myfirstapp/pages/admin/create_user.dart';
 import 'package:myfirstapp/pages/admin/edit_event.dart';
+import 'package:myfirstapp/pages/admin/edit_robot.dart';
+import 'package:myfirstapp/pages/admin/edit_robot_details.dart';
 import 'package:myfirstapp/pages/admin/event_edit.dart';
-import 'package:myfirstapp/pages/directions.dart';
+import 'package:myfirstapp/pages/tours/directions.dart';
 import 'package:myfirstapp/pages/admin/events_form.dart';
 import 'package:myfirstapp/pages/home/homepage.dart';
 import 'package:myfirstapp/pages/admin/log_in.dart';
@@ -23,6 +25,7 @@ import 'package:myfirstapp/pages/home/search.dart';
 import 'package:myfirstapp/pages/tours/MRS_lab_tour.dart';
 import 'package:myfirstapp/pages/tours/MRS_tour_detail.dart';
 import 'package:myfirstapp/pages/tours/audio_tour_final.dart';
+import 'package:myfirstapp/pages/tours/MRS_directions.dart';
 import 'package:myfirstapp/pages/tours/robot_detail.dart';
 import 'package:myfirstapp/pages/tours/solar_park.dart';
 import 'package:myfirstapp/pages/event_detail.dart';
@@ -66,7 +69,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          initialRoute: '/addrobot',
+          initialRoute: '/editrobot',
           routes: <String,WidgetBuilder>{
             '/authenticate':(c)=>Authenticate(),
             '/homepage':(c)=> HomePage(),
@@ -84,7 +87,10 @@ class MyApp extends StatelessWidget {
             '/editevent':(c)=> EditEvent(),
             '/eventedit':(c)=>EventEdit(),
             '/addrobot':(c)=>AddRobot(),
-            '/robotdetail':(c)=>RobotDetail()
+            '/robotdetail':(c)=>RobotDetail(),
+            '/mrsdirection':(c)=> MRSDirections(),
+            '/editrobot':(c)=> EditRobot(),
+            '/editrobotdetail':(c)=>EditRobotDetail()
 
 
           },

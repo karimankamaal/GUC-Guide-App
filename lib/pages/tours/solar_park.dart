@@ -45,7 +45,7 @@ class SolarPark extends StatelessWidget {
               ),
               Container(
               margin: EdgeInsets.only(top: 523, left: 170),
-              child: Icon(Icons.pause, size: 30,color: Color(0xafff0000),),
+              child: Icon(Icons.pause, size: 30,color: Colors.lightBlue[800],),
               ),
           ],
           ),
@@ -61,7 +61,7 @@ class SolarPark extends StatelessWidget {
                 ),
                 child: Center(
                   child: IconButton(
-                   icon: Icon(Icons.arrow_back_ios, color: Color(0xafff0000)),
+                   icon: Icon(Icons.arrow_back_ios, color: Colors.lightBlue[800]),
                     onPressed: (){
                      Navigator.pushNamed(context, '/homepage');
                     },
@@ -77,7 +77,7 @@ class SolarPark extends StatelessWidget {
                             child:
                             Column(
                                 children:[
-                                  Text("Solar",style: TextStyle(fontSize: 46,fontFamily: 'misto',color: Color(0xafff0000)),), Text("Panel",style: TextStyle(fontSize: 46,fontFamily: 'misto',color: Color(0xafff0000))),Text("Park",style: TextStyle(fontSize: 46,fontFamily: 'misto',color: Color(0xafff0000))),Text("Tour",style: TextStyle(fontSize: 46,fontFamily: 'misto',color: Color(0xafff0000))),
+                                  Text("Solar",style: TextStyle(fontSize: 46,fontFamily: 'misto',color: Colors.lightBlue[800]),), Text("Panel",style: TextStyle(fontSize: 46,fontFamily: 'misto',color: Colors.lightBlue[800])),Text("Park",style: TextStyle(fontSize: 46,fontFamily: 'misto',color: Colors.lightBlue[800])),Text("Tour",style: TextStyle(fontSize: 46,fontFamily: 'misto',color: Colors.lightBlue[800])),
                                 ]
                             )
                         )
@@ -117,7 +117,7 @@ class SolarPark extends StatelessWidget {
 
                   Container(
                     margin: EdgeInsets.only(top: 395, left: 218),
-                    child: Icon(Icons.location_on, size: 30,color: Color(0xafff0000),),
+                    child: Icon(Icons.location_on, size: 30,color: Colors.lightBlue[800],),
                   ),
                 ],
               ),
@@ -229,7 +229,7 @@ class Shape extends CustomPainter {
   void paint(Canvas canvas, Size size) {
 
     Paint paint_0_stroke = Paint()..style=PaintingStyle.stroke..strokeWidth=2;
-    paint_0_stroke.color=Colors.red.withOpacity(1.0);
+    paint_0_stroke.color=Colors.lightBlue.withOpacity(1.0);
     canvas.drawCircle(Offset(size.width*0.5000000,size.height*0.2576204),size.width*0.4964789,paint_0_stroke);
 
     Paint paint_0_fill = Paint()..style=PaintingStyle.fill;
@@ -237,15 +237,15 @@ class Shape extends CustomPainter {
     canvas.drawCircle(Offset(size.width*0.5000000,size.height*0.2576204),size.width*0.4964789,paint_0_fill);
 
     Paint paint_1_stroke = Paint()..style=PaintingStyle.stroke..strokeWidth=2;
-    paint_1_stroke.color=Colors.red.withOpacity(1.0);
+    paint_1_stroke.color=Colors.lightBlue.withOpacity(1.0);
     canvas.drawLine(Offset(size.width*0.5035211,size.height*0.2576204),Offset(size.width*0.5035211,size.height*0.9888029),paint_1_stroke);
 
     Paint paint_2_fill = Paint()..style=PaintingStyle.fill;
-    paint_2_fill.color = Colors.red.withOpacity(1.0);
+    paint_2_fill.color = Colors.lightBlue.withOpacity(1.0);
     canvas.drawCircle(Offset(size.width*0.5035211,size.height*0.9798423),size.width*0.03873239,paint_2_fill);
 
     Paint paint_3_fill = Paint()..style=PaintingStyle.fill;
-    paint_3_fill.color = Colors.red.withOpacity(1.0);
+    paint_3_fill.color = Colors.lightBlue.withOpacity(1.0);
     canvas.drawCircle(Offset(size.width*0.5035211,size.height*0.2594125),size.width*0.03873239,paint_3_fill);
 
   }
