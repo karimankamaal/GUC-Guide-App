@@ -97,6 +97,20 @@ flutter:
    - lib/assets/kids-cheering-sound-effect.mp3
    - lib/assets/070 Shake  Morrow Official Audio.mp3
    - lib/assets/ml/model.tflite
+   - lib/assets/gucguide/afterc.jpg
+   - lib/assets/gucguide/afterelevator.jpg
+   - lib/assets/gucguide/aftergate1.jpg
+   - lib/assets/gucguide/basketballcourt.jpg
+   - lib/assets/gucguide/beforec.jpg
+   - lib/assets/gucguide/beforeelevator.jpg
+   - lib/assets/gucguide/c.jpg
+   - lib/assets/gucguide/corridor1.jpg
+   - lib/assets/gucguide/corridor2.jpg
+   - lib/assets/gucguide/door1.jpg
+   - lib/assets/gucguide/door2.jpg
+   - lib/assets/gucguide/elevator.jpg
+   - lib/assets/gucguide/gate1.jpg
+   - lib/assets/gucguide/stairs.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

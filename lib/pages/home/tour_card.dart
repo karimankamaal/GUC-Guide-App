@@ -86,7 +86,7 @@ class _TourCardsState extends State<TourCards> {
               shrinkWrap: true,
               itemCount: events.length,
               itemBuilder: (context, index) {
-                debugPrint("hiiiiiiiii${events[index].imageURL}");
+                debugPrint("hiiiiiiiii${events[index].description}");
                 return Container(
                   margin: EdgeInsets.only(left: Dimensions.width20, bottom: 5),
                   child: Row(

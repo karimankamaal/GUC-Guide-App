@@ -36,13 +36,11 @@ MyUser? _userFromFirebase(User user){
 
   Future<void> saveToFirebase(Timestamp date, String name, String description, String location, File image) async {
     try {
-      // Upload image to Firebase Storage
       final Reference storageRef = FirebaseStorage.instance.ref().child('events').child('${DateTime.now().millisecondsSinceEpoch}.jpeg');
       final UploadTask uploadTask = storageRef.putFile(image);
       final TaskSnapshot downloadUrl = (await uploadTask
           .whenComplete(() => print('done')));
       String imageURL = await downloadUrl.ref.getDownloadURL();
-
 
       // Save fields including image URL to Firestore
       await FirebaseFirestore.instance.collection('events').add({
@@ -51,6 +49,7 @@ MyUser? _userFromFirebase(User user){
         'date': date,
         'location': location,
         'imageURL': imageURL,
+
       });
       await updateTitleLowercaseField();
       print('Event added successfully to Firestore!');
@@ -58,8 +57,14 @@ MyUser? _userFromFirebase(User user){
       print('Error adding event to Firestore: $e');
     }
   }
-  Future<void> saveToFirebase2( String name,  String description,List members, List progress,List images, DateTime date) async {
+
+  Future<void> saveToFirebase2( String name,  String description,List members, List progress,List images, DateTime date, File image) async {
     try {
+      final Reference storageRef = FirebaseStorage.instance.ref().child('events').child('${DateTime.now().millisecondsSinceEpoch}.jpeg');
+      final UploadTask uploadTask = storageRef.putFile(image);
+      final TaskSnapshot downloadUrl = (await uploadTask
+          .whenComplete(() => print('done')));
+      String imageURL = await downloadUrl.ref.getDownloadURL();
       // Save fields including image URL to Firestore
       await FirebaseFirestore.instance.collection('robots').add({
         'name': name,
@@ -67,7 +72,8 @@ MyUser? _userFromFirebase(User user){
         'members': members,
         'images': images,
         'progress': progress,
-        'date': date
+        'date': date,
+        'imageURL':imageURL
       });
 
       print('Robot added successfully to Firestore!');

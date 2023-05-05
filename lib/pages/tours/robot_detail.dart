@@ -12,6 +12,7 @@ class RobotDetail extends StatefulWidget {
 
 class _RobotDetailState extends State<RobotDetail> {
   String description='';
+  String image='';
   List<dynamic> images=[];
   List<dynamic> progress=[];
   List<dynamic> members=[];
@@ -53,6 +54,7 @@ class _RobotDetailState extends State<RobotDetail> {
       description = data!['description'];
       members= List<String>.from(data!['members']);
       images=List<String>.from(data!['images']);
+      image= data!['image'];
       progress= List<String>.from(data!['progress']);
       date= data!['date'].toDate();
        outputDateString = DateFormat('d\'${_getOrdinalSuffix(date?.day)}\' MMMM').format(date!);
@@ -82,7 +84,7 @@ class _RobotDetailState extends State<RobotDetail> {
             Positioned(
                 child: Container(
                   width: 411,
-                  child: Image.asset('lib/assets/img.png',fit: BoxFit.cover,),
+                  child: Image.network(image,fit: BoxFit.cover,),
                 )),
             Positioned(
                 child: Container(

@@ -93,37 +93,3 @@ class _HomePageState extends State<HomePage> {
     ) ;
   }
 }
-class DataSearch extends SearchDelegate <String>{
-  List <String> cities=[
-    "Solar Park",
-    "MRS Lab Tour",
-  ];
-  List <String> recentCities=[];
-  @override
-  List<Widget>? buildActions(BuildContext context) {
-    return [IconButton(onPressed: (){
-    }, icon: Icon(Icons.clear))];
-  }
-  @override
-  Widget? buildLeading(BuildContext context) {
-
-  }
-  @override
-  Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
-    throw UnimplementedError();
-  }
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    final suggestionList= query.isEmpty? recentCities:cities;
-    return ListView.builder(
-      itemBuilder: (context,index)=>ListTile(
-        leading: Icon(Icons.location_on),
-        title: Text(suggestionList[index]),
-
-      ),
-      itemCount: suggestionList.length,
-    );
-    throw UnimplementedError();
-  }
-}
