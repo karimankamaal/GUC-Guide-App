@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                     child: Icon(Icons.search,color:Colors.white, size: Dimensions.iconSize24,),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(Dimensions.radius10),
-                        color: Color(0xff1c1b1f)
+                        color: Colors.blue
                     ),
                   ),
                 ),

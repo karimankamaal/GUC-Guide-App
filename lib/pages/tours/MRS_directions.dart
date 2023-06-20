@@ -13,13 +13,55 @@ class MRSDirections extends StatefulWidget {
 }
 
 class _MRSDirectionsState extends State<MRSDirections> {
+
+
   PageController pageController= PageController(viewportFraction: 0.85);
   var _currPageValue=0.0;
   double _scaleFactor=0.8;
   double _height =Dimensions.pageViewContainer;
-  String image1= "lib/assets/img.png";
-  String image2= "lib/assets/solarpanel.jpeg";
-  String image3="lib/assets/destination_pin.png";
+  int noOfImages1=13;
+  int noOfImages2=13;
+  bool gate1=true;
+
+  String g1= "lib/assets/gucguide/gate1.jpg";
+  String g2= "lib/assets/gucguide/aftergate1.jpg";
+  String g3="lib/assets/gucguide/basketballcourt.jpg";
+  String g4="lib/assets/gucguide/stairs.jpg";
+  String g5="lib/assets/gucguide/beforec.jpg";
+  String g6="lib/assets/gucguide/c.jpg";
+  String g7="lib/assets/gucguide/afterc.jpg";
+  String g8="lib/assets/gucguide/beforeelevator.jpg";
+  String g9="lib/assets/gucguide/elevator.jpg";
+  String g10="lib/assets/gucguide/corridor1.jpg";
+  String g11="lib/assets/gucguide/corridor2.jpg";
+  String g12="lib/assets/gucguide/door1.jpg";
+  String g13="lib/assets/gucguide/door2.jpg";
+
+
+  String gg1= "lib/assets/gucguide/gate1.jpg";
+  String gg2= "lib/assets/gucguide/aftergate1.jpg";
+  String gg3="lib/assets/gucguide/beforeelevator.jpg";
+  String gg4="lib/assets/gucguide/elevator.jpg";
+  String gg5="lib/assets/gucguide/corridor1.jpg";
+  String gg6="lib/assets/gucguide/corridor2.jpg";
+  String gg7="lib/assets/gucguide/door1.jpg";
+
+
+  String image1='';
+  String image2='';
+  String image3='';
+  String image4='';
+  String image5='';
+  String image6='';
+  String image7='';
+  String image8='';
+  String image9='';
+  String image10='';
+  String image11='';
+  String image12='';
+
+
+
   @override
   void initState() {
     super.initState();
@@ -28,6 +70,18 @@ class _MRSDirectionsState extends State<MRSDirections> {
         _currPageValue= pageController.page!;
       });
     });
+    image1=g1;
+    image2=g2;
+    image3=g3;
+    image4=g4;
+    image5=g5;
+    image6=g6;
+    image7=g7;
+    image8=g8;
+    image9=g9;
+    image10=g10;
+    image11=g11;
+    image12=g12;
   }
   @override
   void dispose() {
@@ -51,13 +105,13 @@ class _MRSDirectionsState extends State<MRSDirections> {
                   icon: Icon(
                       Icons.arrow_back_ios, color: Colors.lightBlue[800]),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/mrstour');
+                    Navigator.pushNamed(context, '/solarpark');
                   },
                 ),
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 45, left: 310),
+              margin: EdgeInsets.only(top: 45, left: 300),
               child: Column(
                 children: [
                   Text("MRS", style: TextStyle(fontSize: 23,
@@ -78,7 +132,7 @@ class _MRSDirectionsState extends State<MRSDirections> {
               height:500,
               child: PageView.builder(
                   controller: pageController,
-                  itemCount: 3,
+                  itemCount: gate1? 12:7,
                   itemBuilder: (context,position){
                     return _buildPageItem(position);
                   }),
@@ -89,7 +143,7 @@ class _MRSDirectionsState extends State<MRSDirections> {
               left: 160,
               child:
               new DotsIndicator(
-                dotsCount: 3,
+                dotsCount: gate1?12:7,
                 position: _currPageValue,
                 decorator: DotsDecorator(
                   activeColor: Colors.lightBlue[800],
@@ -101,7 +155,7 @@ class _MRSDirectionsState extends State<MRSDirections> {
             ),
             Positioned(
               top: 750,
-              left: 80,
+              left: 120,
               child: GNav(
                   rippleColor: Colors.lightBlue, // tab button ripple color when pressed
                   hoverColor: Colors.lightBlue, // tab button hover color
@@ -123,7 +177,20 @@ class _MRSDirectionsState extends State<MRSDirections> {
                       icon: Icons.location_pin,
                       text: 'Gate 1',
                       onPressed:(){
-
+                        setState(() {
+                          image1=g1;
+                          image2=g2;
+                          image3=g3;
+                          image4=g4;
+                          image5=g5;
+                          image6=g6;
+                          image7=g7;
+                          image8=g8;
+                          image9=g9;
+                          image10=g10;
+                          image11=g11;
+                          image12=g12;
+                        });
                       },
                     ),
                     GButton(
@@ -131,23 +198,18 @@ class _MRSDirectionsState extends State<MRSDirections> {
                       text: 'Gate 2',
                       onPressed: (){
                         setState(() {
-                          image1=image3;
-                          image2=image1;
-                          image3=image2;
+                          image1=gg1;
+                          image2=gg2;
+                          image3=gg3;
+                          image4=gg4;
+                          image5=gg5;
+                          image6=gg6;
+                          image7=gg7;
+                          gate1=false;
                         });
                       },
                     ),
-                    GButton(
-                        icon: Icons.location_pin,
-                        text: 'Gate 3',textSize: 30,
-                        onPressed: (){
-                          setState(() {
-                            image1=image2;
-                            image2=image3;
-                            image3=image2;
-                          });
-                        }
-                    ),
+
 
                   ]
               ),
@@ -179,6 +241,7 @@ class _MRSDirectionsState extends State<MRSDirections> {
       transform: matrix,
       child: Stack(
           children: [
+
             Container(
               height:500,
               width:400,
@@ -187,7 +250,16 @@ class _MRSDirectionsState extends State<MRSDirections> {
                   borderRadius: BorderRadius.circular(Dimensions.radius30),
                   color:Color(0xFF69c5df)
               ),
-              child: index==0? Image.asset(image1,fit: BoxFit.fitHeight,): index==1?Image.asset(image2,fit: BoxFit.fitHeight):index==2? Image.asset(image3,fit: BoxFit.fill):Image.asset(image3,fit: BoxFit.fill),
+              child: index==0? Image.asset(image1,fit: BoxFit.fitHeight,): index==1?Image.asset(image2,fit: BoxFit.fitHeight):index==2? Image.asset(image3,fit: BoxFit.fill):index==3?Image.asset(image4,fit: BoxFit.fill):index==4? Image.asset(image5,fit: BoxFit.fill):
+              index==5?Image.asset(image6,fit: BoxFit.fill):index==6?Image.asset(image7,fit: BoxFit.fill):index==7?Image.asset(image8,fit: BoxFit.fill):index==8?Image.asset(image9,fit: BoxFit.fill):index==9?Image.asset(image10,fit: BoxFit.fill):index==10? Image.asset(image11,fit: BoxFit.fill):
+              index==11?Image.asset(image12,fit: BoxFit.fill):null,
+            ),
+            Container(
+                margin:EdgeInsets.only(top:80,left:128),
+                child: CustomPaint(
+                  size: Size(90, (90*1.9647887323943662).toDouble()), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
+                  painter: Shape(),
+                )
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -233,4 +305,35 @@ class _MRSDirectionsState extends State<MRSDirections> {
     );
   }
 
+}
+class Shape extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+
+    Paint paint_0_stroke = Paint()..style=PaintingStyle.stroke..strokeWidth=2;
+    paint_0_stroke.color=Colors.lightBlue.withOpacity(1.0);
+    canvas.drawCircle(Offset(size.width*0.5000000,size.height*0.2576204),size.width*0.4964789,paint_0_stroke);
+
+    // Paint paint_0_fill = Paint()..style=PaintingStyle.fill;
+    // paint_0_fill.color = Colors.white.withOpacity(1.0);
+    // canvas.drawCircle(Offset(size.width*0.5000000,size.height*0.2576204),size.width*0.4964789,paint_0_fill);
+
+    Paint paint_1_stroke = Paint()..style=PaintingStyle.stroke..strokeWidth=2;
+    paint_1_stroke.color=Colors.lightBlue.withOpacity(1.0);
+    canvas.drawLine(Offset(size.width*0.5035211,size.height*0.2576204),Offset(size.width*0.5035211,size.height*0.9888029),paint_1_stroke);
+
+    Paint paint_2_fill = Paint()..style=PaintingStyle.fill;
+    paint_2_fill.color = Colors.lightBlue.withOpacity(1.0);
+    canvas.drawCircle(Offset(size.width*0.5035211,size.height*0.9798423),size.width*0.03873239,paint_2_fill);
+
+    Paint paint_3_fill = Paint()..style=PaintingStyle.fill;
+    paint_3_fill.color = Colors.lightBlue.withOpacity(1.0);
+    canvas.drawCircle(Offset(size.width*0.5035211,size.height*0.2594125),size.width*0.03873239,paint_3_fill);
+
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
 }

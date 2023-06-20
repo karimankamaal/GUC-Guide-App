@@ -32,7 +32,6 @@ class EventDetail extends StatelessWidget {
     SpecialEvent? event=ModalRoute.of(context)?.settings.arguments as SpecialEvent?;
     DateTime? dateTime= event?.date?.toDate();
     String outputDateString = DateFormat('d\'${_getOrdinalSuffix(dateTime?.day)}\' MMMM').format(dateTime!);
-   print(event?.imageURL);
     return Scaffold(
         body:Stack(
           children: [
@@ -47,7 +46,13 @@ class EventDetail extends StatelessWidget {
             color:Colors.lightBlue[800],
                 borderRadius: BorderRadius.circular(30)
             ),
-                child: Image.network(event?.imageURL??'')
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30), // Same border radius as the outer container
+                  child: Image.asset(
+                    'lib/assets/ROS in Autonomous Driving.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
 
            )),
             Positioned(
@@ -79,24 +84,32 @@ class EventDetail extends StatelessWidget {
               ),)
           ),
             Positioned(
-              left:0,
+              left:40,
                 right:0,
-                top: 440,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                        IconAndTextWidget(icon: Icons.location_pin, text: event?.location ?? '', color: Color(0xFFB6ACAC), iconColor: Color(0xafff0000)),
-                        IconAndTextWidget(icon: Icons.calendar_month, text: outputDateString, color:Color(0xFFB6ACAC), iconColor:Color(0xafff0000))
-                   ]
-                    )
+                top: 460,
+                child: SingleChildScrollView(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                          Flexible(child: IconAndTextWidget(icon: Icons.location_pin, text: event?.location ?? '', color: Colors.blue, iconColor: Colors.blue)),
+                          Flexible(child: IconAndTextWidget(icon: Icons.calendar_month, text: outputDateString, color:Colors.blue, iconColor:Colors.blue))
+                     ]
+                      ),
+                )
 
                 ),
-             Container(
-               margin: EdgeInsets.only(top:520,left: 10),
-               height: 600,
-                 child:
-             SingleChildScrollView(child:
-             ExpandableText( text: event?.description?? ''))),
+            Positioned(
+              top:20,
+              left:20,
+              child: Container(
+                width: 360,
+                margin: EdgeInsets.only(top: 520, left: 0),
+                child: SingleChildScrollView(
+                  child: ExpandableText(text: "During the event, attendees will have the opportunity to explore various aspects of ROS in the context of autonomous driving. The event will cover topics such as the role of ROS in perception, mapping, localization, path planning, and control systems for autonomous vehicles. Expert speakers and industry professionals will share their knowledge, insights, and real-world experiences in leveraging ROS for autonomous driving applications."),
+                ),
+              ),
+            ),
+
 
 
 

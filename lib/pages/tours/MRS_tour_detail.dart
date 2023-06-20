@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -150,7 +151,7 @@ class _MRSDetailState extends State<MRSDetail> {
               child: Stack(children: <Widget>[
 
                 Padding(
-                  padding: EdgeInsets.only(top:50,left:20),
+                  padding: EdgeInsets.only(top:190,left:20),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         primary: Colors.transparent,
@@ -171,8 +172,19 @@ class _MRSDetailState extends State<MRSDetail> {
                 ),
               ]),
             ),
-
-
+         
+            Padding(
+              
+            padding: EdgeInsets.only(top: 200,left:27),
+            child: Container(
+           width:360,
+           child:Text("Discover the MRS Lab Tour: Snap a photo of a robot and unlock its captivating details.", style:
+             TextStyle(
+               fontSize: 16, fontFamily: 'robotoN',fontWeight: FontWeight.bold
+             ),
+           )
+         )
+            )
           ],
         )
 

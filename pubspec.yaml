@@ -66,6 +66,7 @@ dependencies:
   assets_audio_player: ^3.0.6
   animated_text_kit:
   permission_handler: ^10.2.0
+  cached_network_image:
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -111,6 +112,12 @@ flutter:
    - lib/assets/gucguide/elevator.jpg
    - lib/assets/gucguide/gate1.jpg
    - lib/assets/gucguide/stairs.jpg
+   - lib/assets/3rd Annual Robotics Competition.png
+   - lib/assets/Into The Robotics Era.png
+   - lib/assets/ROS in Autonomous Driving.png
+   - lib/assets/Startup Comeptition.png
+   - lib/assets/MRS Logo.png
+   - lib/assets/blackpanther.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

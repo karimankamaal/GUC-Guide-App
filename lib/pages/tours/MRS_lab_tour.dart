@@ -32,7 +32,7 @@ class MRSTour extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
-                      image: AssetImage('lib/assets/solarpanel.jpeg'),
+                      image: AssetImage('lib/assets/MRS Logo.png'),
                       fit: BoxFit.fill,
                     ),
                   ),

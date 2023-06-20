@@ -151,24 +151,48 @@ class _EventEditState extends State<EventEdit> {
         }
       }
     }
-    Future<void> deleteEvent(String eventitle) async{
-      try{
+
+    Future<void> deleteEvent(BuildContext context, String eventTitle) async {
+      try {
         final QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('events')
-            .where('title', isEqualTo: eventitle)
+            .where('title', isEqualTo: eventTitle)
             .get();
         if (snapshot.docs.isEmpty) {
-          throw Exception('No event found with title $eventitle');
+          throw Exception('No event found with title $eventTitle');
         }
         final DocumentSnapshot eventDoc = snapshot.docs.first;
-        debugPrint("got the document ");
-        final String eventId = eventDoc.id;
-        debugPrint("id of document im trying to change");
-        await FirebaseFirestore.instance.collection('myCollection').doc(eventId).delete();
-      }
-      catch(e){
+
+        // Show a confirmation dialog to the user
+        final confirmed = await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Confirmation'),
+              content: Text('Are you sure you want to delete this event?'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: Text('Delete'),
+                ),
+              ],
+            );
+          },
+        );
+
+        if (confirmed) {
+          final String eventId = eventDoc.id;
+          await FirebaseFirestore.instance.collection('events').doc(eventId).delete();
+          // Perform any additional actions after deleting the event
+        }
+      } catch (e) {
         throw Exception("Error deleting event: $e");
       }
     }
+
     Future<void> updateDescription(String eventitle) async {
 
       await showModalBottomSheet(
@@ -241,7 +265,13 @@ class _EventEditState extends State<EventEdit> {
                 color: Colors.lightBlue[800],
                 borderRadius: BorderRadius.circular(30),
               ),
-              child: Image.network(event?.imageURL ?? ''),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30), // Same border radius as the outer container
+                child: Image.asset(
+                  'lib/assets/ROS in Autonomous Driving.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ),
           Positioned(
@@ -264,16 +294,17 @@ class _EventEditState extends State<EventEdit> {
             ),
           ),
           Positioned(
-            left: 80,
+            left: 50,
             right: 0,
             top: 370,
             child: Row(
               children:[
                 Text(
-              event?.title ?? '',
+              'ROS in Autonomo...',
               style: TextStyle(
                 fontFamily: 'robotoN',
                 fontSize: 30,
+                overflow: TextOverflow.ellipsis
               ),
             ),
                 IconButton(onPressed: (){updateTitle(event?.title??'');}, icon: Icon(Icons.edit))
@@ -293,7 +324,7 @@ class _EventEditState extends State<EventEdit> {
                         icon: Icons.location_pin,
                         text: event?.location ?? '',
                         color: Color(0xFFB6ACAC),
-                        iconColor: Color(0xafff0000)),
+                        iconColor: Colors.blue),
                     GestureDetector(
                       child: IconButton(
                         icon: Icon(
@@ -311,7 +342,7 @@ class _EventEditState extends State<EventEdit> {
                         icon: Icons.calendar_month,
                         text: outputDateString,
                         color: Color(0xFFB6ACAC),
-                        iconColor: Color(0xafff0000)),
+                        iconColor: Colors.blue),
                     GestureDetector(
                       onTap: () {
                         // navigate to edit date screen
@@ -342,7 +373,7 @@ class _EventEditState extends State<EventEdit> {
                   child: SingleChildScrollView(
                     child: ExpandableText(
 
-                      text: "cankikb kbk ",
+                      text: "ROS in Autonomous Driving is an engaging and informative event that delves into the exciting world of Robotics Operating System (ROS) and its application in autonomous driving. The event aims to provide participants with a comprehensive understanding of how ROS contributes to the development and implementation of autonomous driving technologies.",
 
                     ),
                   ),
@@ -364,7 +395,7 @@ class _EventEditState extends State<EventEdit> {
                   IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
-                     deleteEvent(event?.title?? '');
+                     deleteEvent( context, event?.title?? '');
                     },
                   ),
                   IconButton(

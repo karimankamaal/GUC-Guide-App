@@ -1,10 +1,6 @@
 import 'dart:convert';
-
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -13,15 +9,13 @@ import 'package:myfirstapp/models/user.dart';
 import 'dart:typed_data';
 class AuthService{
   final FirebaseAuth _auth= FirebaseAuth.instance;
-
-MyUser? _userFromFirebase(User user){
+  MyUser? _userFromFirebase(User user){
   return user!=null? MyUser(uid: user.uid):null;
 }
   Stream<MyUser?> get user {
     return _auth.authStateChanges()
         .map((User? user) => _userFromFirebase(user!));
   }
-
   Future signInWithEmailAndPassword(String email,String password)async{
   try{
     UserCredential result= await _auth.signInWithEmailAndPassword(email: email, password: password);
@@ -32,8 +26,14 @@ MyUser? _userFromFirebase(User user){
     return null;
   }
   }
-
-
+  Future<void> changePassword(String newPassword, User user ) async {
+    try {
+      await user.updatePassword(newPassword);
+      print("Password changed successfully.");
+    } catch (e) {
+      print("Failed to change password: ${e.toString()}");
+    }
+  }
   Future<void> saveToFirebase(Timestamp date, String name, String description, String location, File image) async {
     try {
       final Reference storageRef = FirebaseStorage.instance.ref().child('events').child('${DateTime.now().millisecondsSinceEpoch}.jpeg');
@@ -57,7 +57,6 @@ MyUser? _userFromFirebase(User user){
       print('Error adding event to Firestore: $e');
     }
   }
-
   Future<void> saveToFirebase2( String name,  String description,List members, List progress,List images, DateTime date, File image) async {
     try {
       final Reference storageRef = FirebaseStorage.instance.ref().child('events').child('${DateTime.now().millisecondsSinceEpoch}.jpeg');
@@ -81,7 +80,6 @@ MyUser? _userFromFirebase(User user){
       print('Error adding robot to Firestore: $e');
     }
   }
-
   // Update existing documents to include the 'title_lowercase' field
   Future<void> updateTitleLowercaseField() async {
     final result = await FirebaseFirestore.instance.collection('events').get();
@@ -95,8 +93,7 @@ MyUser? _userFromFirebase(User user){
     });
     await batch.commit();
   }
-
-   Future<List<QueryDocumentSnapshot>> getCollection(String collectionPath) async {
+  Future<List<QueryDocumentSnapshot>> getCollection(String collectionPath) async {
     QuerySnapshot snapshot = await FirebaseFirestore.instance.collection(collectionPath).get();
     List<QueryDocumentSnapshot> documents = snapshot.docs;
     return documents;
@@ -104,3 +101,5 @@ MyUser? _userFromFirebase(User user){
 
 
 }
+
+

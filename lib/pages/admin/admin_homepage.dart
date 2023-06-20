@@ -66,8 +66,7 @@ class _AdminHomepageState extends State<AdminHomepage> {
            ]
               ),
             ),
-
-           //top left
+            //top left
              Positioned(
                    child: Stack(
                      children:[
@@ -118,9 +117,7 @@ class _AdminHomepageState extends State<AdminHomepage> {
 
                  ]
                )),
-             
-
-
+            // top right
             Positioned(child: Stack(
               children: [
                 Positioned(
@@ -173,7 +170,7 @@ class _AdminHomepageState extends State<AdminHomepage> {
 
               ],
             )),
-
+            //bottom left
             Positioned(child: Stack(
               children: [
                 Positioned(
@@ -226,7 +223,7 @@ class _AdminHomepageState extends State<AdminHomepage> {
 
               ],
             )),
-
+            //bottom right
             Positioned(child: Stack(
               children: [
                 Positioned(

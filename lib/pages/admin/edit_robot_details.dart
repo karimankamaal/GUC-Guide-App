@@ -476,7 +476,7 @@ class _EditRobotDetailState extends State<EditRobotDetail> {
           Positioned(
               child: Container(
                 width: 411,
-                child: Image.asset('lib/assets/img.png',fit: BoxFit.cover,),
+                child: Image.asset('lib/assets/blackpanther.png', fit:BoxFit.cover)
               )),
           Positioned(
             child: Container(

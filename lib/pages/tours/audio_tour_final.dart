@@ -89,13 +89,13 @@ Duration timing= Duration(milliseconds: 100);
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 45, left: 290),
+                    margin: EdgeInsets.only(top: 45, left: 269),
                     child: Column(
                       children: [
-                        Text("MRS", style: TextStyle(fontSize: 25,
+                        Text("Solar", style: TextStyle(fontSize: 25,
                             fontFamily: 'misto',
                             color: Colors.lightBlue[800]),),
-                        Text("Lab", style: TextStyle(fontSize: 25,
+                        Text("Park", style: TextStyle(fontSize: 25,
                             fontFamily: 'misto',
                             color: Colors.lightBlue[800]),),
                         Text("Tour", style: TextStyle(fontSize: 25,
@@ -108,7 +108,7 @@ Duration timing= Duration(milliseconds: 100);
                   Stack(
                     children: [
                       AudioWidget.assets(
-                        path: 'lib/assets/070 Shake  Morrow Official Audio.mp3',
+                        path: 'lib/assets/Solar_park_Audio.mp3',
                         play: isPlaying,
                         onFinished: (){
                           setState(() {
@@ -152,16 +152,14 @@ Duration timing= Duration(milliseconds: 100);
                             color: Colors.white,
                           ),
                               child: AnimatedTextKit(
-
                            repeatForever: false,
-
                            totalRepeatCount: 1,
                            animatedTexts: [
-                             TyperAnimatedText("This is the text i  need for the solar park tour the audio will be playing",
+                             TyperAnimatedText("Welcome to the Solar Panel Park audio tour at the German University in Cairo.",
                                  speed: Duration(milliseconds: 100)),
-                             TyperAnimatedText("gooog game lskfn kjnsfj kjfkj kjjfedbn fdsv dfv",
+                             TyperAnimatedText("Subtitle 2",
                                  speed: Duration(milliseconds: 100)),
-                             TyperAnimatedText("last time to ptint this skjnw whatever whatever wathetever ",
+                             TyperAnimatedText("Subtitle 3 ",
                                  speed: Duration(milliseconds: 100))
                           ],
                         )

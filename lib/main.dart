@@ -36,7 +36,6 @@ import 'package:myfirstapp/widgets/column.dart';
 import 'package:myfirstapp/wrapper.dart';
 import 'helper/dependencies.dart'as dep;
 import 'package:provider/provider.dart';
-
 import 'models/specialevents_model.dart';
 
 Future<void> main() async {
@@ -69,7 +68,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          initialRoute: '/directions',
+          initialRoute: '/authenticate',
           routes: <String,WidgetBuilder>{
             '/authenticate':(c)=>Authenticate(),
             '/homepage':(c)=> HomePage(),
@@ -116,30 +115,25 @@ class _MyHomePageState extends State<MyHomePage> {
 
     LocalNotificationService.initialize(context);
 
-    ///gives you the message on which user taps
-    ///and it opened the app from terminated state
+   ///launching the app
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if(message != null){
         final routeFromMessage = message.data["route"];
         Navigator.of(context).pushNamed(routeFromMessage);
       }
     });
-
     ///forground work
     FirebaseMessaging.onMessage.listen((message) {
       if(message.notification != null){
         print(message.notification!.body);
         print(message.notification!.title);
       }
-
       LocalNotificationService.display(message);
     });
-
     ///When the app is in background but opened and user taps
     ///on the notification
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
       final routeFromMessage = message.data["route"];
-
       Navigator.of(context).pushNamed(routeFromMessage);
     });
 

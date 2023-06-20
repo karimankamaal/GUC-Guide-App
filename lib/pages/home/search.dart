@@ -15,6 +15,8 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   List events=[];
   TextEditingController _controller = TextEditingController();
+
+
   void searchFromFirebase(String query) async {
     if (query.isEmpty) {
       // If query is empty, clear the search results

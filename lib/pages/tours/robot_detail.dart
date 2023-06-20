@@ -39,28 +39,35 @@ class _RobotDetailState extends State<RobotDetail> {
   Widget build(BuildContext context) {
     final Object? message = ModalRoute.of(context)?.settings.arguments;
     String robotName= message.toString();
-
-    Future<void> myMethod() async{
+    Future<void> myMethod() async {
       final QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('robots')
           .where('name', isEqualTo: robotName)
           .get();
+
       if (snapshot.docs.isEmpty) {
         throw Exception('No robot found with title $robotName');
       }
-      final DocumentSnapshot robotDoc = snapshot.docs.first;
-      final String robodId = robotDoc.id;
-      final snapshot2 = await FirebaseFirestore.instance.collection('robots').doc(robodId).get();
-      final data = snapshot2.data();
-      description = data!['description'];
-      members= List<String>.from(data!['members']);
-      images=List<String>.from(data!['images']);
-      image= data!['image'];
-      progress= List<String>.from(data!['progress']);
-      date= data!['date'].toDate();
-       outputDateString = DateFormat('d\'${_getOrdinalSuffix(date?.day)}\' MMMM').format(date!);
 
+      final DocumentSnapshot robotDoc = snapshot.docs.first;
+      final String robotId = robotDoc.id;
+      final snapshot2 = await FirebaseFirestore.instance.collection('robots').doc(robotId).get();
+      final data = snapshot2.data();
+
+      if (data != null) {
+        description = data['description'] ?? '';
+        members = List<String>.from(data['members'] ?? []);
+        images = List<String>.from(data['images'] ?? []);
+        image = data['imageURL'] ?? '';
+        progress = List<String>.from(data['progress'] ?? []);
+        date = data['date']?.toDate() ?? DateTime.now();
+        outputDateString = DateFormat('d\'${_getOrdinalSuffix(date.day)}\' MMMM').format(date);
+      } else {
+        throw Exception('Failed to retrieve robot data');
+      }
     }
+
     myMethod().then((_) {
+
       setState(() {
         description;
         progress;
@@ -80,11 +87,25 @@ class _RobotDetailState extends State<RobotDetail> {
     return Scaffold(
         body: Stack(
           children: [
-            
+
             Positioned(
                 child: Container(
                   width: 411,
-                  child: Image.network(image,fit: BoxFit.cover,),
+                  child: Image.network(
+                    image,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null)
+                        return child;
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                              : null,
+                        ),
+                      );
+                    },
+                  ),
                 )),
             Positioned(
                 child: Container(
@@ -241,14 +262,31 @@ class _RobotDetailState extends State<RobotDetail> {
                                       Container(width:320,child: Text(progress[index]))
                                     ],
                                   ),
-                                  Container(
-                                    width: 320,
-                                    height: 200,
-                                    decoration: BoxDecoration(
-                                      color: Colors.lightBlue,
-                                      borderRadius: BorderRadius.circular(20)
-                                    ),
-                                  )
+                                  Stack(
+                                    children: [
+                                      Container(
+                                        width: 320,
+                                        height: 200,
+                                        child: Image.network(
+                                          images[index],
+                                          fit: BoxFit.cover,
+                                          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                                            if (loadingProgress == null)
+                                              return child;
+                                            return Center(
+                                              child: CircularProgressIndicator(
+                                                value: loadingProgress.expectedTotalBytes != null
+                                                    ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                                                    : null,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
                                 ],
                               );
                             }),

@@ -53,6 +53,7 @@ class _EditRobotState extends State<EditRobot> {
 
   @override
   Widget build(BuildContext context) {
+    print(documents.length);
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -117,7 +118,7 @@ class _EditRobotState extends State<EditRobot> {
                                   child: Stack(
                                     children: [
                                       Image.network(
-                                        images[index],
+                                        images[0],
                                         width: 200,
                                         height: 200,
                                         fit: BoxFit.cover,

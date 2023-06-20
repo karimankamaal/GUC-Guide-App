@@ -44,8 +44,8 @@ class _ExpandableTextState extends State<ExpandableText> {
             },
             child: Row(
               children: [
-                Text("Show more",style:TextStyle(fontSize: 15,fontFamily: 'robotoT',color: Color(0xafff0000)) ,),
-                Icon(hiddenText?Icons.arrow_drop_down: Icons.arrow_drop_up,color: Color(0xafff0000),)
+                Text("Show more",style:TextStyle(fontSize: 15,fontFamily: 'robotoT',color: Colors.blue) ,),
+                Icon(hiddenText?Icons.arrow_drop_down: Icons.arrow_drop_up,color: Colors.blue,)
               ],
             ),
           )

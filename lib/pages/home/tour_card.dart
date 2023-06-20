@@ -18,6 +18,8 @@ class TourCards extends StatefulWidget {
 }
 
 class _TourCardsState extends State<TourCards> {
+  List<String> images=['https://firebasestorage.googleapis.com/v0/b/guc-guide.appspot.com/o/events%2F1685102331681.jpeg?alt=media&token=0619d649-6f58-4aed-8171-32c6bc398e40','https://firebasestorage.googleapis.com/v0/b/guc-guide.appspot.com/o/events%2F1685102063183.jpeg?alt=media&token=8bf2caee-ff98-4599-bcc6-35f2068dc33c', 'https://firebasestorage.googleapis.com/v0/b/guc-guide.appspot.com/o/events%2F1685102281567.jpeg?alt=media&token=280b641b-58ad-4b52-9b45-c31890aeda8b','https://firebasestorage.googleapis.com/v0/b/guc-guide.appspot.com/o/events%2F1685102218575.jpeg?alt=media&token=b5f5cf42-4cb8-4598-831b-8799d4f76653'];
+
   PageController pageController= PageController(viewportFraction: 0.85);
   var _currPageValue=0.0;
   double _scaleFactor=0.8;
@@ -86,7 +88,6 @@ class _TourCardsState extends State<TourCards> {
               shrinkWrap: true,
               itemCount: events.length,
               itemBuilder: (context, index) {
-                debugPrint("hiiiiiiiii${events[index].description}");
                 return Container(
                   margin: EdgeInsets.only(left: Dimensions.width20, bottom: 5),
                   child: Row(
@@ -99,19 +100,21 @@ class _TourCardsState extends State<TourCards> {
                           borderRadius: BorderRadius.circular(Dimensions.radius20),
                           color: Colors.blue,
                         ),
-                        child: events[index]?.imageURL != null
-                            ? Image.network(
-                          events[index]?.imageURL ?? '',
-                          errorBuilder: (context, error, stackTrace) {
-                            debugPrint('Failed to load image: $error');
-                            return Center(
-                              child: Text('Failed to load image.'),
-                            );
-                          },
-                        )
-                            : Center(child: CircularProgressIndicator(color: Colors.red,)),
+                        child:
+                         ClipRRect(
+                             borderRadius: BorderRadius.circular(20),
+                           child: Image(
+                             image: index==0?  AssetImage('lib/assets/ROS in Autonomous Driving.png'):index==1?AssetImage('lib/assets/Into The Robotics Era.png'):index==2? AssetImage('lib/assets/Startup Comeptition.png'):AssetImage('lib/assets/3rd Annual Robotics Competition.png'),
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              debugPrint('Failed to load image: $error');
+                              return Center(
+                                child: Text('Failed to load image.'),
+                              );
+                            },
+                        ),
+                         )
                       ),
-
                       //text container
                       Expanded(
                           child: Container(
@@ -125,8 +128,6 @@ class _TourCardsState extends State<TourCards> {
                                 ),
                                 color: Colors.white,
                               ),
-
-
                               //
                               child: AppColumn(event: events[index])
                           )
@@ -178,6 +179,13 @@ class _TourCardsState extends State<TourCards> {
                 }
               },
               child: Container(
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                  child: Image(
+                    image: index==0? AssetImage('lib/assets/solarpanel.jpeg'):AssetImage('lib/assets/MRS Logo.png'),
+                        fit: BoxFit.cover,
+                  ),
+                ),
                 height:Dimensions.pageViewContainer,
                 width:400,
                 margin: EdgeInsets.only(left: Dimensions.width10,right: Dimensions.width10),
